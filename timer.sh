@@ -1,4 +1,12 @@
 #!/bin/bash
+# File to track created timers
+tracker_file="$(pwd)/.active_timers.txt"
+# Function to remove the PID line in tracker file
+cleanup() {
+  sed -i "/:$PID$/d" "$tracker_file"
+}
+# Set trap to cleanup function no matter how scrpt exits
+trap cleanup EXIT INT TERM
 
 # Check if the user provided the time in minutes
 if [ $# -eq 0 ]; then
@@ -10,8 +18,16 @@ fi
 num_mins=$1
 # Convert minutes to seconds
 wait_time=$((num_mins * 60))
-# Sleep for specified duration
-sleep $wait_time
-kdialog --title "Timer completed" --passivepopup "Time up!"
-paplay ~/.sound/ding.wav
+start_time=$(date +%s)
+
+# Track the current timer
+PID=$$
+echo "$start_time:$num_mins:$PID">>$tracker_file
+# Start the timer
+if sleep $wait_time; then
+  kdialog --title "Timer completed" --passivepopup "Time up!"
+  paplay ~/.sound/ding.wav
+fi
+  
+# Show that timer completed normally
 exit 0
