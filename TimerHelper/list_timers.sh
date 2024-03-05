@@ -1,5 +1,5 @@
 #!/bin/bash
-tracker_file="$(pwd)/.active_timers.txt"
+tracker_file="$(dirname "$0")/.active_timers.txt"
 curr_timer=0
 clean_tracker_file(){
   while IFS=: read -r start_time wait_time PID; do
