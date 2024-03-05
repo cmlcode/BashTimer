@@ -24,10 +24,10 @@ start_time=$(date +%s)
 PID=$$
 echo "$start_time:$wait_time:$PID">>$tracker_file
 # Start the timer
-if sleep $wait_time; then
+sleep $wait_time
+# Check that timer is still active
+if grep -Fq ":$PID" "$tracker_file"; then
   kdialog --title "Timer completed" --passivepopup "Time up!"
   paplay $(dirname "$0")/ding.wav
 fi
-  
-# Show that timer completed normally
 exit 0
