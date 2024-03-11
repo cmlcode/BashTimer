@@ -26,6 +26,9 @@ process_input() {
     -l)
       sh $(dirname "$0")/TimerHelper/list_timers.sh
       ;;
+    -r)
+      sh $(dirname "$0")/TimerHelper/remove_timer.sh "$2"
+      ;;
   esac
 }
 process_input "$@"
