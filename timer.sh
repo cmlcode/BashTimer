@@ -1,6 +1,13 @@
 #!/bin/bash
-tracker_file="$(dirname "$0")/TimerHelper/.active_timers.txt"
+tracker_file="$HOME/.config/BashTimer/active_timers.txt"
 help_text="Create Timer: timer <numMins>, timer -c <numMins>\nRemove Timer: timer -r <timerNum>\nList Timers: timer -l\n"
+
+# Check if tracker file exists / create
+if [[ ! -e  $tracker_file ]]; then
+  mkdir -p "$HOME/.config/BashTimer"
+  touch "$tracker_file"
+fi
+
 is_uint() {
   case $1 in
     '' | *[!0-9]*) return 1;;

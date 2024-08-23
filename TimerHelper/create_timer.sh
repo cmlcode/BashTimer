@@ -1,6 +1,6 @@
 #!/bin/bash
 # File to track created timers
-tracker_file="$(dirname "$0")/.active_timers.txt"
+tracker_file="$HOME/.config/BashTimer/active_timers.txt"
 # Function to remove the PID line in tracker file
 cleanup() {
   sed -i "/:$PID$/d" "$tracker_file"

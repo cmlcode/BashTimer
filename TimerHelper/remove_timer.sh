@@ -1,5 +1,5 @@
 #!/bin/bash
-tracker_file="$(dirname "$0")/.active_timers.txt"
+tracker_file="$HOME/.config/BashTimer/active_timers.txt"
 timer_num="$1"
 
 if [ -z "$timer_num" ]; then
