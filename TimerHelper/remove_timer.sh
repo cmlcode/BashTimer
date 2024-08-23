@@ -1,5 +1,7 @@
 #!/bin/bash
-tracker_file="$HOME/.config/BashTimer/active_timers.txt"
+# File locator
+BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+tracker_file="$BASE_DIR/active_timers.txt"
 timer_num="$1"
 
 if [ -z "$timer_num" ]; then

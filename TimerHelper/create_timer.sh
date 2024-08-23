@@ -1,6 +1,8 @@
 #!/bin/bash
-# File to track created timers
-tracker_file="$HOME/.config/BashTimer/active_timers.txt"
+# File locators
+BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+tracker_file="$BASE_DIR/active_timers.txt"
+
 # Function to remove the PID line in tracker file
 cleanup() {
   sed -i "/:$PID$/d" "$tracker_file"
@@ -28,6 +30,6 @@ sleep $wait_time
 # Check that timer is still active
 if grep -Fq ":$PID" "$tracker_file"; then
   kdialog --title "Timer completed" --passivepopup "Time up!"
-  paplay $(dirname "$0")/ding.wav
+  paplay "$BASE_DIR/ding.wav"
 fi
 exit 0

@@ -1,6 +1,9 @@
 #!/bin/bash
-tracker_file="$HOME/.config/BashTimer/active_timers.txt"
+# File locator
+BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+tracker_file="$BASE_DIR/active_timers.txt"
 curr_timer=0
+
 clean_tracker_file(){
   while IFS=: read -r start_time wait_time PID; do
     if ! ps -p  ${PID} > /dev/null 2>&1; then
